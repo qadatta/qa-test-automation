@@ -36,13 +36,12 @@ Feature: this feature does API testing
      
     Given User has access to custom-download api
     When I execute custom-download  POST request using spec "download_specification.json"
-    #Then I should see status code as 200 
-     #C F	RTVR
-    #Given User has access to custom-download status api
-    #When I execute custom-download  GET request 
-    #Then I should see status code as 200
-    #And Verify response is having completed status
-         #
+    Then I should see status code as 200 
+    Given User has access to custom-download status api
+    When I execute custom-download  GET request 
+    Then I should see status code as 200
+    And Verify response is having completed status
+         
          
          
          
