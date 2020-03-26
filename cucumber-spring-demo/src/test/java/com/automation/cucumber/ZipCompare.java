@@ -19,7 +19,7 @@ public class ZipCompare {
 //      System.exit(1);
 //    }
 
-	  String [] args1 = {"C:\\project\\qa-test-automation\\cucumber-spring-demo\\src\\test\\java\\com\\automation\\cucumber\\zip_file1.zip","C:\\project\\qa-test-automation\\cucumber-spring-demo\\src\\test\\java\\com\\automation\\cucumber\\zip_file2.zip"};
+	  String [] args1 = {"C:/project/FM/source_file.zip","C:/project/FM/custom-download-destination-s3-file.zip"};
 
 
     ZipFile file1;
@@ -118,24 +118,25 @@ public class ZipCompare {
 
 		String file1Line = null;
 		String file2Line = null;
+		int lineCounter = 0;
 		try {
 			while ((file1Line = bfReader1.readLine()) != null) {
+				++lineCounter ;
 				file2Line = bfReader2.readLine();
 
 				if (false == file1Line.equals(file2Line)) {
-					System.out.println("---------------------------------");
-					System.out.println("File 1: line not matched \n" + file1Line);
-					System.out.println("File 2: line not matched \n" + file2Line);
-					
-					String[] file1Columns = file1Line.split("|");
-					String[] file2Columns = file2Line.split("|");
+					System.out.println("\n ---------Difference on line number: "+ lineCounter +" ----------------");
+					System.out.println("File 1 line: "+ lineCounter +" not matched \n" + file1Line);
+					System.out.println("File 2 line: "+ lineCounter +" not matched \n" + file2Line);
+					System.out.println();
+					String[] file1Columns = file1Line.split("\\|");
+					String[] file2Columns = file2Line.split("\\|");
 					System.out.println("Following column data not matched");
 					
+				
 					for (int i = 0; i < file1Columns.length; i++) {
-						
-						
 						if (false == file1Columns[i].equals(file2Columns[i])) {
-							System.out.println("Column number "+ i+1 + ": File 1 data: "+ file1Columns[i] + ": File 2 data: "+ file2Columns[i] );
+							System.out.println("Column number "+ i + "==> "+ file1Columns[i] + " <<>> "+ file2Columns[i] );
 						}
 					
 					}
