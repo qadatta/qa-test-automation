@@ -13,7 +13,6 @@ Feature: this feature does API testing using rest asssured
 			And response includes the currentState as "completed"
 			
 #			Given s3URI is available from custom-download api
-#			When download custom-download zip file using curl command
-#			Then files downloaded in source folder
-#			And compare source zip file with destination zip file
+			When download custom-download zip file using curl command
+  		Then compare source zip file with destination zip file
 #			

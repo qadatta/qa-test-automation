@@ -11,73 +11,96 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+
 // From xml beans
 public class ZipCompare {
-  public static void main(String[] args) {
+	 
+	public void compareZipFiles(String sourceZipFile, String  destinationZipFile){
 //    if (args.length != 2) {
 //      System.out.println("Usage: zipcompare [file1] [file2]");
 //      System.exit(1);
 //    }
 
-	  String [] args1 = {"C:/project/FM/source_file.zip","C:/project/FM/custom-download-destination-s3-file.zip"};
-
+	  //String [] args1 = {"C:/project/FM/source_file.zip","C:/project/FM/custom-download-destination-s3-file.zip"};
+//		sourceZipFile = "C:/project/FM/source_file.zip";
+//		destinationZipFile = "C:/project/FM/custom-download-destination-s3-file.zip";
 
     ZipFile file1;
     try {
-      file1 = new ZipFile(args1[0]);
+      file1 = new ZipFile(sourceZipFile);
     } catch (IOException e) {
-      System.out.println("Could not open zip file " + args1[0] + ": " + e);
+      System.out.println("Could not open zip file " + sourceZipFile + ": " + e);
       System.exit(1);
       return;
     }
 
     ZipFile file2;
     try {
-      file2 = new ZipFile(args1[1]);
+      file2 = new ZipFile(destinationZipFile);
     } catch (IOException e) {
-      System.out.println("Could not open zip file " + args1[0] + ": " + e);
+      System.out.println("Could not open zip file " + destinationZipFile + ": " + e);
       System.exit(1);
       return;
     }
 
-    System.out.println("Comparing " + args1[0] + " with " + args1[1] + ":");
-    
-    System.out.println("Comparing File size .... ");
+    System.out.println("Comparing " + sourceZipFile + " with " + destinationZipFile + ":");
     
     
-
+    
+    System.out.println("Following files present in "+ sourceZipFile + " and total file count is: "+ file1.size());
     Set set1 = new LinkedHashSet();
     for (Enumeration e = file1.entries(); e.hasMoreElements();)
-      set1.add(((ZipEntry) e.nextElement()).getName());
-     Set set2 = new LinkedHashSet();
+    {
+    	String fileName = ((ZipEntry) e.nextElement()).getName();
+    	System.out.println(fileName);
+    	set1.add(fileName);
+    }
+
+
+    System.out.println("Following files present in "+ destinationZipFile + " and total file count is: "+ file2.size());
+    Set set2 = new LinkedHashSet();
     for (Enumeration e = file2.entries(); e.hasMoreElements();)
-      set2.add(((ZipEntry) e.nextElement()).getName());
+    {
+    	String fileName = ((ZipEntry) e.nextElement()).getName();
+    	System.out.println(fileName);
+    	set2.add(fileName);
+    	
+    }
+	System.out.println("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
 
     int errcount = 0;
     int filecount = 0;
     for (Iterator i = set1.iterator(); i.hasNext();) {
+
       String name = (String) i.next();
       if (!set2.contains(name)) {
-        System.out.println(name + " not found in " + args1[1]);
+        System.out.println("File: " + name + " not found in " + destinationZipFile);
         errcount += 1;
         continue;
       }
       try {
         set2.remove(name);
-        InputStream stream1 = file1.getInputStream(file1.getEntry(name));
-        InputStream stream2 = file2.getInputStream(file2.getEntry(name));
+        ZipEntry csv_file_from_File1 = file1.getEntry(name);
+        ZipEntry csv_file_from_File2 = file2.getEntry(name);
+        
+        InputStream stream1 = file1.getInputStream(csv_file_from_File1);
+        InputStream stream2 = file2.getInputStream(csv_file_from_File2);
         
 				if (!streamsEqual(stream1, stream2)) {
-					System.out.println("#############################################");
 					stream1 = file1.getInputStream(file1.getEntry(name));
 			        stream2 = file2.getInputStream(file2.getEntry(name));
-			        			System.out.println(name + " does not match");
+			        			System.out.println("File: "+ name + " does not match with destination");
+			        			System.out.println("Source file size is "+ csv_file_from_File1.getSize()/1024 + " KB and destination file size is " + csv_file_from_File2.getSize()/1024 +" KB") ;
 				
 					getDifferenceInFiles(stream1, stream2);
-					System.out.println("#############################################");
+					System.out.println("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
 
 					errcount += 1;
 					continue;
+				}else
+				{
+        			System.out.println("File: "+ name + " matches with destination and file size is " + csv_file_from_File1.getSize()/1024 +" KB" );
+					System.out.println("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
 				}
       } catch (Exception e) {
         System.out.println(name + ": IO Error " + e);
@@ -89,16 +112,10 @@ public class ZipCompare {
     }
     for (Iterator i = set2.iterator(); i.hasNext();) {
       String name = (String) i.next();
-      System.out.println(name + " not found in " + args1[0]);
+      System.out.println(name + " not found in " + sourceZipFile);
       errcount += 1;
     }
-    System.out.println(filecount + " entries matched");
-    if (errcount > 0) {
-      System.out.println(errcount + " entries did not match");
-      System.exit(1);
     }
-    System.exit(0);
-  }
 
   private static boolean compareFileSize(ZipFile file1,ZipFile file2) {
 	
@@ -135,8 +152,12 @@ public class ZipCompare {
 					
 				
 					for (int i = 0; i < file1Columns.length; i++) {
-						if (false == file1Columns[i].equals(file2Columns[i])) {
-							System.out.println("Column number "+ i + "==> "+ file1Columns[i] + " <<>> "+ file2Columns[i] );
+						try {
+							if (false == file1Columns[i].equals(file2Columns[i])) {
+								System.out.println("Column number "+ i + "==> "+ file1Columns[i] + " <<>> "+ file2Columns[i] );
+							}
+						} catch (Exception e) {
+							System.out.println("Line column count for source and destination file does not match");
 						}
 					
 					}
