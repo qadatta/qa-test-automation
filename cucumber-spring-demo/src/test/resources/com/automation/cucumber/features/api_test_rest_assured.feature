@@ -12,7 +12,10 @@ Feature: this feature does API testing using rest asssured
 			Then the status code is 200
 			And response includes the currentState as "completed"
 			
-#			Given s3URI is available from custom-download api
-			When download custom-download zip file using curl command
-  		Then compare source zip file with destination zip file
-#			
+			Given s3URI is available from custom-download api
+			When download custom-download zip file
+
+			Then compare file counts of both files 
+			And compare file names present in both zip files
+			And compare file size of both files
+			And compare file content of both files
