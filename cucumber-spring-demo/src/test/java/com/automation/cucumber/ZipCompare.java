@@ -271,7 +271,7 @@ public class ZipCompare {
 		scenario.write("<b> Comparing " + sourceZipFile + " with \n" + destinationZipFile + " file counts <b>\n");
 		scenario.write("Total files present in " + sourceZipFile + " are: " + file1.size());
 		scenario.write("Total files present in " + destinationZipFile + " are: " + file2.size());
-//		assertThat("File count not matches", file1.size() == file2.size());
+	//	assertThat("File count not matches", file1.size() == file2.size());
 	}
 
 	public void compareFileNamesPresentInZipFiles(String sourceZipFile, String destinationZipFile) {
