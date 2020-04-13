@@ -42,6 +42,7 @@ public class FileUtils {
 	 *            download file path
 	 */
 	public void downloadFileusingHttpGetRequest(String url, String savedFile) {
+		System.out.println("File name: "+savedFile);
 		HttpClient client = HttpClients.createDefault();
 
 		HttpGet httpGet = new HttpGet(url);
@@ -53,11 +54,15 @@ public class FileUtils {
 				try (FileOutputStream outstream = new FileOutputStream(savedFile)) {
 					entity.writeTo(outstream);
 				} catch (IOException e) {
+					System.out.println("problem in downloainf file ");
+
 					System.out.println(e.getMessage());
 				}
 			}
 
 		} catch (IOException e) {
+			System.out.println("problem in downloainf file ");
+
 			e.printStackTrace();
 		}
 	}
@@ -174,7 +179,7 @@ public class FileUtils {
 		for (int i = 0; i < file1Columns.length; i++) {
 			try {
 				if (false == file1Columns[i].equals(file2Columns[i])) {
-					differences.add("Column number " + i + "==> " + file1Columns[i] + " <<>> " + file2Columns[i]);
+					differences.add("Column number " + i + "==> Actual value: " + file1Columns[i] + "  and expected value: " + file2Columns[i]);
 				}
 			} catch (Exception e) {
 				System.out.println("Line column count for source and destination file does not match");
@@ -200,11 +205,11 @@ public class FileUtils {
 			scenario.write("Comparing file "+ actualZipEntry.getName());
 			InputStream expectedStream = expectedZip.getInputStream(expectedZipEntry);
 			InputStream actualStream = actualZip.getInputStream(actualZipEntry);
-			if (!streamsEqual(expectedStream, actualStream)) {
+			if (!streamsEqual(actualStream,expectedStream)) {
 				expectedStream = expectedZip.getInputStream(expectedZipEntry);
 				actualStream = actualZip.getInputStream(actualZipEntry);
 
-				getDifferenceInFiles(expectedStream, actualStream);
+				getDifferenceInFiles(actualStream,expectedStream);
 
 			} else {
 				isZipEntryMatched = true;
