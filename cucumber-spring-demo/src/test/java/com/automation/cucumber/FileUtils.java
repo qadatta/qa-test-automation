@@ -230,17 +230,28 @@ public class FileUtils {
 
 		System.out.println("Comparing " + getAbsuluteZipFileName(actualZip)+ " with \n " + getAbsuluteZipFileName(expectedZip) + ":");
 		scenario.write("<b>Comparing files names present in " + getAbsuluteZipFileName(actualZip) + " with \n file names present in " + getAbsuluteZipFileName(expectedZip) + "</b> \n");
-		scenario.write("<b>Following files present in " + getAbsuluteZipFileName(actualZip) + " and total file count is: " + actualZip.size() + "</b>");
+		scenario.write("<b>Following files present in " + getAbsuluteZipFileName(actualZip) + ". </b>");
 
-		System.out.println("Following files present in " + getAbsuluteZipFileName(actualZip) + " and total file count is: " + actualZip.size());
-		Set set1 = getZipFileNames(actualZip);
-		scenario.write("<b>Following files present in " + getAbsuluteZipFileName(expectedZip) + " and total file count is: " + expectedZip.size() + "</b>");
-		System.out.println("Following files present in " + getAbsuluteZipFileName(expectedZip) + " and total file count is: " + expectedZip.size());
-		Set set2 = getZipFileNames(expectedZip);
+		System.out.println("Following files " + actualZip.size() + "present in " + getAbsuluteZipFileName(actualZip) + " and total file count is: " + actualZip.size());
+		Set<String> set1 = getZipFileNames(actualZip);
+		for (Iterator<String> iterator = set1.iterator(); iterator.hasNext();) {
+			String fileName = (String) iterator.next();
+			scenario.write(fileName + "\n");
+			
+		}
+		
+		scenario.write("<b>Following files " + expectedZip.size() + "present in " + getAbsuluteZipFileName(expectedZip) + ". </b>");
+		System.out.println("Following files "+ expectedZip.size() +" present in " + getAbsuluteZipFileName(expectedZip) + " and total file count is: " + expectedZip.size());
+		Set<String> set2 = getZipFileNames(expectedZip);
+		for (Iterator<String> iterator = set2.iterator(); iterator.hasNext();) {
+			String fileName = (String) iterator.next();
+			scenario.write(fileName + "\n");
+		}
+		
 		set1.removeAll(set2);
 		set2.removeAll(set1);
 		
-	//		assertThat("File present in both zip are not matches", set1.isEmpty() && set2.isEmpty());
+			assertThat("File present in both zip are not matches", set1.isEmpty() && set2.isEmpty());
 		
 	}
 	
@@ -273,7 +284,7 @@ public class FileUtils {
 		scenario.write("<b> Comparing " + getAbsuluteZipFileName(actualZip) + " with \n" + getAbsuluteZipFileName(expectedZip)+ " file counts <b>\n");
 		scenario.write("Total files present in " + getAbsuluteZipFileName(actualZip) + " are: " + actualZip.size());
 		scenario.write("Total files present in " + getAbsuluteZipFileName(expectedZip) + " are: " + expectedZip.size());
-//		assertThat("File count not matches", actualZip.size() == expectedZip.size());
+		assertThat("File count not matches", actualZip.size() == expectedZip.size());
 	}
 	
 	public String getAbsuluteZipFileName(ZipFile zipFile)
@@ -339,19 +350,5 @@ public class FileUtils {
 		}
 	}
 
-	
-//	public static void main(String[] args) {
-//		FileUtils fileUtils = new FileUtils(scenario);
-//
-//		String url = "https://fnma-ppafo0-prodpubex-us-east-1-files.s3.amazonaws.com/cas/response/96981159-afe1-4b31-b7c2-d669864578f5.zip?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQCK2FMz7mkooeCLnvw%2BSlCVhXdXc49tdf4IT7UdDEXTNQIgS8CxgrvJTRT7YdKKcC4MuA3WfxA6pvy%2BhLg1TMLt7o4qtAMIJhACGgwwOTAwNDM0NzE5MjciDCIA8TqjH9U3IOju%2BCqRAwHWkvQKo%2FcV%2BULCYAEVriiB8K4nBuBiNKjLDDFut6VTa%2BcZXLU55EP7RlVEiKbgyPUT7n8%2FNp1UceteDAieb6URY2LOKxBtJmbI54ZTvPyS9hr7OIL7KU1%2B3BHmuRJkOO9W0ev7XeeSRgC23gUpeyLIRyFWFBw9zxgu%2BsKdbsr%2FnCjjVjjWgIRBpmdzRNuwLoT46ceTwhj8AKisG5O%2FbnOHfnouNq8Waf1B1Fkc7hnS9WVb2e0xY8YFefzdoXnvFZZHaSX8lCJtehIuqCbuYVorPddp%2B1syMblintDay3WZHcU99GCwnu497V91ShjkG2KPYvueyYM8MBG76kuLwi44yDJn9md05ZKqF3v4tVUQM7t4WdWzcw%2BTHatQs7hOEqMMqV0Biyi4PviagY%2FVtI42W%2B%2F9TkP4xWAdF8c0SJvz6aIXxeluzt62L6L6sbBGN5Enzy9TRwGt0%2FKGYhhDRfSNd5CyysFOOrDDBGYhQPnjgfq3ntr306bOel5wDPFuZoQyqvwZleHTXAjSh6OU5uUaMNmexfQFOusBQt%2BveddTwEvzoIVMscfDVNyasE8UsUEPCdWbXr6r44Gv7zWlxrXutsKz7KqPOvWuiRsyBNGvboEc%2F2VQL9X%2BOhHnhTSLSlJ6eHcy%2BuScl27iCXXZlGfH5Hmtp0PlY1%2BusMJwO%2FSZN1SsLQd7KHFx8uQqJsLNVxqHhggx449xVh2uupGXJOI%2FJyUUmoDzeZNs7ZTLQxCZgJh2jzVHMju411fwytmatEaTXqlq2wDXLYPb5EDxpmk26MSTPN2RBA%2FsAAtW4UTEtsGY2VLt6HyDYi3bo1CtcNS%2FfSnBfq8Uk7TR7b38mSMiBOC0ow%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200411T050651Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=ASIARJ5YCLA32WIJXUEI%2F20200411%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=3a1467b47f231225db4b4c129e38d04b4a4b45267ee16f3ce415a225078c7481";
-//		// String url =
-//		// "s3://custom-download/expected-custom-downloads/CAS_custom-donwload_expected.zip";
-//
-//		String requestId = "96981159-afe1-4b31-b7c2-d669864578f5";
-//		String downloadPath = System.getProperty("user.dir") + "/temp-files/" + requestId + ".zip";
-//		System.out.println("Downloading file...");
-//		fileUtils.downloadFileusingHttpGetRequest(url, downloadPath);
-//		System.out.println("File downloaded at " + downloadPath);
-//	}
 
 }
