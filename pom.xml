@@ -24,7 +24,11 @@
 		<maven.surefire.version>2.22.1</maven.surefire.version>
 
 	</properties>
-
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.3.RELEASE</version>
+	</parent>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
