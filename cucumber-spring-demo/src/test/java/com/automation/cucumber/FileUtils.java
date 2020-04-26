@@ -251,7 +251,7 @@ public class FileUtils {
 			scenario.write(fileName + "\n");
 		}
 		
-		//	assertThat("File present in both zip are not matches", set1.equals(set2));
+			assertThat("File present in both zip are not matches", set1.equals(set2));
 		
 	}
 	
@@ -275,7 +275,7 @@ public class FileUtils {
 		scenario.write("File size of "+  getAbsuluteZipFileName(expectedZip) + " : "+ file1Size + " Bytes");
 		scenario.write("File size of "+  getAbsuluteZipFileName(actualZip)+ " : "+ file2Size + " Bytes");
 
-	//	assertThat("File size not matches", file1Size==file2Size);
+		assertThat("File size not matches", file1Size==file2Size);
 		
 	}
 	
@@ -284,7 +284,7 @@ public class FileUtils {
 		scenario.write("<b> Comparing " + getAbsuluteZipFileName(actualZip) + " with \n" + getAbsuluteZipFileName(expectedZip)+ " file counts <b>\n");
 		scenario.write("Total files present in " + getAbsuluteZipFileName(actualZip) + " are: " + actualZip.size());
 		scenario.write("Total files present in " + getAbsuluteZipFileName(expectedZip) + " are: " + expectedZip.size());
-	//	assertThat("File count not matches", actualZip.size() == expectedZip.size());
+		assertThat("File count not matches", actualZip.size() == expectedZip.size());
 	}
 	
 	public String getAbsuluteZipFileName(ZipFile zipFile)
