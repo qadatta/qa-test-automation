@@ -36,8 +36,8 @@ public class ServicesStepDefinationUsingRestAssured {
 
 	WebDriver driver;
 	WebDriverWait wait;
-	static String requestId = "96981159-afe1-4b31-b7c2-d669864578f5"; // "af55dc10-8790-45a2-94e8-133ec13cd115";
-	String authorizationCode = "eyJraWQiOiJyRzhja1lKNXFnS2FwNitpVG52UWpmM1pSK1lpRG9GOFY5c1pjR1B3MGUwPSIsImFsZyI6IlJTMjU2In0.eyJjdXN0b206b3JnYW5pemF0aW9uIjoiU2FuZ2FuYWt5IFRlY2hub2xvZ3kiLCJzdWIiOiJlZDIzMzhmNy1hNmVkLTQ0YzMtODQ0OC1kYmE3YzgyNWNjMmUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfRzVqWUlMRXFYIiwiY29nbml0bzp1c2VybmFtZSI6InFhLmRhdHRhQGdtYWlsLmNvbSIsImN1c3RvbTpqb2JfdGl0bGUiOiJXZWIgRGV2ZWxvcGVyXC9FbmdpbmVlciIsImdpdmVuX25hbWUiOiJEYXR0YSIsImF1ZCI6IjM4MGRpaXRtc2JhN2Q2MjIwaDhsc3ExYnFvIiwiZXZlbnRfaWQiOiI5ODJiN2U4NS00YzFlLTQ0NWYtODJiZi1kZWM2ZGUyM2UzYjMiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU4Nzc5NjQ2MCwiZXhwIjoxNTg3ODAwMDYxLCJpYXQiOjE1ODc3OTY0NjEsImZhbWlseV9uYW1lIjoiTW9yZSIsImVtYWlsIjoicWEuZGF0dGFAZ21haWwuY29tIn0.XA5UvrdQqKh_dVaZIUa5BIW9U8CIP6y-iTILsFU4Ky_j5_3MyFdytqRqrn9vFXusCWv0b4sqZVb-gDkiqzfg9xDimSg3oSeknpnA2_uKTP89k7lvR8GoSdZe39lPEnyq_Kdrf-YAbforY9Z7IVg1Ns9pBtPpm-SK6Afgs2eDuIPMt7t3jahdnfFMxWQbqZ62pW5k7q-i4RRqaq_JVdlxnsd3m8ch9KC8Gzaerhh-WssCMqCfPT7wLH4bRNI_nLdkOgL7konYZV8xDwwYCfstLYLZBbr6TNpEi494tH19RICYkDc_MifBVSHOQRxNcRgqQUT8OCbINp0rHj_DFVo3fA";
+	static String requestId = "78f8ed8b-1fb2-4a19-ad19-e0e07bc57e4f"; // "af55dc10-8790-45a2-94e8-133ec13cd115";
+	String authorizationCode = "eyJraWQiOiJyRzhja1lKNXFnS2FwNitpVG52UWpmM1pSK1lpRG9GOFY5c1pjR1B3MGUwPSIsImFsZyI6IlJTMjU2In0.eyJjdXN0b206b3JnYW5pemF0aW9uIjoiU2FuZ2FuYWt5IFRlY2hub2xvZ3kiLCJzdWIiOiJlZDIzMzhmNy1hNmVkLTQ0YzMtODQ0OC1kYmE3YzgyNWNjMmUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfRzVqWUlMRXFYIiwiY29nbml0bzp1c2VybmFtZSI6InFhLmRhdHRhQGdtYWlsLmNvbSIsImN1c3RvbTpqb2JfdGl0bGUiOiJXZWIgRGV2ZWxvcGVyXC9FbmdpbmVlciIsImdpdmVuX25hbWUiOiJEYXR0YSIsImF1ZCI6IjM4MGRpaXRtc2JhN2Q2MjIwaDhsc3ExYnFvIiwiZXZlbnRfaWQiOiI1OWJiMmY0My02NTZmLTQxZTEtYTlhMS0xMzA0NGQ3ODU1YTEiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU4ODkzMjE4NSwiZXhwIjoxNTg4OTM1ODE2LCJpYXQiOjE1ODg5MzIyMTYsImZhbWlseV9uYW1lIjoiTW9yZSIsImVtYWlsIjoicWEuZGF0dGFAZ21haWwuY29tIn0.jWHDn2mZOtXAEDYPirhyyfdIqoRCLm_oDAH-aQgOP2KvGOt22XOwKhslX6BP4vgumNpsYbQbbAp8E2XKCmnx-DZpUxgHSKztdqZfoQdykM5e2jMEdzODGDxfRQsSZkrkpRPlNvGMzBNvPCg876BrUN2PRwxhyhVve32rWs9twWpvdMTD8nmQDIx0T6rVFBDI7wSWDSUjqD4XEaKMLnVLpIKHzAtAw2NMj3m2rtQyFWslQ8pKvD3gOXCIgLPsqKJI5nnZ2TyehHV_636YW8C32VD5dyKWYRDPTgwl7eNIa76PVW0GT-cXN4NILvRyQqcsKfUs2OjPCl0Wk2I8upGZdQ";
 	String s3Uri = "";
 	String s3Url_expected = "s3://custom-download/expected-custom-downloads/CAS_custom-donwload_expected.zip";
 	Response response;
@@ -201,6 +201,22 @@ public class ServicesStepDefinationUsingRestAssured {
 		}
 
 	}
+	@Then("check merged file present both zip files")
+	public void check_merged_file_names_present_in_both_zip_files() {
+		FileUtils fileUtils =  new FileUtils(scenario);
+		String actualZipFile = userDir + temp_dir + requestId + ".zip";
+
+		try {
+			fileUtils.checkMergedFileNamesPresentInZipFiles(new ZipFile(actualZipFile), new ZipFile(expectedZipDirectory + expectedFileToCompare));
+		} catch (IOException e) {
+			System.out.println("Problem in comparing file names. " + e.getMessage());
+			assertThat("Problem in comparing file names. ",false);
+
+			
+		}
+
+	}	
+	
 
 	@Then("compare file size of both files")
 	public void compare_file_size_of_both_files() {

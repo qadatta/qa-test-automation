@@ -6,11 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -254,6 +250,53 @@ public class FileUtils {
 			assertThat("File present in both zip are not matches", set1.equals(set2));
 		
 	}
+
+	public void checkMergedFileNamesPresentInZipFiles(ZipFile actualZip , ZipFile expectedZip) {
+
+		
+
+		System.out.println("Comparing " + getAbsuluteZipFileName(actualZip)+ " with \n " + getAbsuluteZipFileName(expectedZip) + ":");
+		scenario.write("<b>Comparing files names present in " + getAbsuluteZipFileName(actualZip) + " with \n file names present in " + getAbsuluteZipFileName(expectedZip) + "</b> \n");
+		scenario.write("<b>Following files present in " + getAbsuluteZipFileName(actualZip) + ". </b>");
+
+		System.out.println("Following files " + actualZip.size() + "present in " + getAbsuluteZipFileName(actualZip) + " and total file count is: " + actualZip.size());
+		Set<String> set1 = getZipFileNames(actualZip);
+		for (Iterator<String> iterator = set1.iterator(); iterator.hasNext();) {
+			String fileName = (String) iterator.next();
+			scenario.write(fileName + "\n");
+			
+		}
+		
+		scenario.write("<b>Following files " + expectedZip.size() + "present in " + getAbsuluteZipFileName(expectedZip) + ". </b>");
+		System.out.println("Following files "+ expectedZip.size() +" present in " + getAbsuluteZipFileName(expectedZip) + " and total file count is: " + expectedZip.size());
+		Set<String> set2 = getZipFileNames(expectedZip);
+		for (Iterator<String> iterator = set2.iterator(); iterator.hasNext();) {
+			String fileName = (String) iterator.next();
+			scenario.write(fileName + "\n");
+		}
+		
+		
+		Set actual = new HashSet(set1);
+		Set expected = new HashSet<>(set2);
+		actual.removeAll(set2);
+		expected.removeAll(set1);
+		String actualMergedfileName ="";
+		String expectedMergedfileName ="";
+
+		if(actual.size() == expected.size() && 1 == actual.size())
+		{
+			for (Iterator<String> iterator = actual.iterator(); iterator.hasNext();) {
+				 actualMergedfileName = (String) iterator.next();
+			}
+			for (Iterator<String> iterator = expected.iterator(); iterator.hasNext();) {
+				 expectedMergedfileName = (String) iterator.next();
+			}
+		}
+
+		if(false == ( actualMergedfileName.contains("CAS_merged_") && expectedMergedfileName.contains("CAS_merged_")))
+			assertThat("File name is not having \"CAS_merged_\" ", false);
+
+	}
 	
 	public void compareFileSizeOfZipFiles(ZipFile actualZip , ZipFile expectedZip) {
 
@@ -313,15 +356,28 @@ public class FileUtils {
 		for (Iterator i = set1.iterator(); i.hasNext();) {
 
 			String name = (String) i.next();
-			if (!set2.contains(name)) {
+			String actualZipEntryName = name;
+
+			//Condition added if zip file contains merged file. Then actual and expected zip has file name containing request Id
+			if(name.contains("CAS_merged_"))
+			{
+
+				for (Iterator it = set2.iterator(); it.hasNext();) {
+					 String sName = (String) it.next();
+					 if(sName.contains("CAS_merged_"))
+						 actualZipEntryName = sName;
+				}
+
+			}
+			if (!set2.contains(actualZipEntryName)) {
 				System.out.println("File: " + name + " not found in " + getAbsuluteZipFileName(actualFile));
 				scenario.write("File: " + name + " not found in " + getAbsuluteZipFileName(actualFile));
 				continue;
 			}
 			try {
-				set2.remove(name);
+				set2.remove(actualZipEntryName);
 				ZipEntry expectedZipEntry = expectedFile.getEntry(name);
-				ZipEntry actualZipEntry = actualFile.getEntry(name);
+				ZipEntry actualZipEntry = actualFile.getEntry(actualZipEntryName);
 
 
 				

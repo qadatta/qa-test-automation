@@ -1,25 +1,25 @@
 @api_check
 Feature: this feature does API testing using rest asssured 
 
-	Scenario: execute custom-download POST api for given specification and compare new downloads with existing one
-
-			Given Custom-download POST api is up and running
-			When Custom-download POST api executed for specification given in file "download_specification1"
-			Then the status code is 200
-			
-			Given Custom-download GET api is up and running
-			When Custom-download GET api is executed for request-id of custom-download post request
-			Then the status code is 200
-			And response includes the currentState as "completed"
-			
-			Given s3URI is available from custom-download api
-			When download custom-download zip file
-
-			Then compare file counts of both files 
-			And compare file names present in both zip files
-			And compare file size of both files
-			And compare file content of both files
-			
+#	Scenario: execute custom-download POST api for given specification and compare new downloads with existing one
+#
+#			Given Custom-download POST api is up and running
+#			When Custom-download POST api executed for specification given in file "download_specification1"
+#			Then the status code is 200
+#			
+#			Given Custom-download GET api is up and running
+#			When Custom-download GET api is executed for request-id of custom-download post request
+#			Then the status code is 200
+#			And response includes the currentState as "completed"
+#			
+#			Given s3URI is available from custom-download api
+#			When download custom-download zip file
+#
+#			Then compare file counts of both files 
+#			And compare file names present in both zip files
+#			And compare file size of both files
+#			And compare file content of both files
+#			
 			Scenario: execute custom-download POST api for given specification and compare new downloads with existing one
 
 			Given Custom-download POST api is up and running
@@ -35,8 +35,8 @@ Feature: this feature does API testing using rest asssured
 			When download custom-download zip file
 
 			Then compare file counts of both files 
-			And compare file names present in both zip files
-			And compare file size of both files
+			And check merged file present both zip files
+			#And compare file size of both files
 			And compare file content of both files
 			
 	

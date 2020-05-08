@@ -1,11 +1,12 @@
-{"deal-specification": {
+{
+  "deal-specification": {
     
   },
   "date-specification": {
-    "earliest-date": "022020",
-    "most-recent-date": "022020",
+    "earliest-date": "012020",
+    "most-recent-date": "012020",
     "include-issuance": true,
     "include-remittance": false
   },
-  "single-response-file-requested": false
+  "single-response-file-requested": true
 }
