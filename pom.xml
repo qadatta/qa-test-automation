@@ -56,8 +56,10 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven.surefire.version}</version>
 					 <configuration>
-          <useSystemClassLoader>false</useSystemClassLoader>
-        </configuration>
+			          <useSystemClassLoader>false</useSystemClassLoader>
+						 <parallel>methods</parallel>
+						 <threadCount>2</threadCount>
+        			 </configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>

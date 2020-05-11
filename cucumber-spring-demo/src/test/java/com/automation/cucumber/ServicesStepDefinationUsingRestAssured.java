@@ -36,8 +36,8 @@ public class ServicesStepDefinationUsingRestAssured {
 
 	WebDriver driver;
 	WebDriverWait wait;
-	static String requestId = "78f8ed8b-1fb2-4a19-ad19-e0e07bc57e4f"; // "af55dc10-8790-45a2-94e8-133ec13cd115";
-	String authorizationCode = "eyJraWQiOiJyRzhja1lKNXFnS2FwNitpVG52UWpmM1pSK1lpRG9GOFY5c1pjR1B3MGUwPSIsImFsZyI6IlJTMjU2In0.eyJjdXN0b206b3JnYW5pemF0aW9uIjoiU2FuZ2FuYWt5IFRlY2hub2xvZ3kiLCJzdWIiOiJlZDIzMzhmNy1hNmVkLTQ0YzMtODQ0OC1kYmE3YzgyNWNjMmUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfRzVqWUlMRXFYIiwiY29nbml0bzp1c2VybmFtZSI6InFhLmRhdHRhQGdtYWlsLmNvbSIsImN1c3RvbTpqb2JfdGl0bGUiOiJXZWIgRGV2ZWxvcGVyXC9FbmdpbmVlciIsImdpdmVuX25hbWUiOiJEYXR0YSIsImF1ZCI6IjM4MGRpaXRtc2JhN2Q2MjIwaDhsc3ExYnFvIiwiZXZlbnRfaWQiOiI1OWJiMmY0My02NTZmLTQxZTEtYTlhMS0xMzA0NGQ3ODU1YTEiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU4ODkzMjE4NSwiZXhwIjoxNTg4OTM1ODE2LCJpYXQiOjE1ODg5MzIyMTYsImZhbWlseV9uYW1lIjoiTW9yZSIsImVtYWlsIjoicWEuZGF0dGFAZ21haWwuY29tIn0.jWHDn2mZOtXAEDYPirhyyfdIqoRCLm_oDAH-aQgOP2KvGOt22XOwKhslX6BP4vgumNpsYbQbbAp8E2XKCmnx-DZpUxgHSKztdqZfoQdykM5e2jMEdzODGDxfRQsSZkrkpRPlNvGMzBNvPCg876BrUN2PRwxhyhVve32rWs9twWpvdMTD8nmQDIx0T6rVFBDI7wSWDSUjqD4XEaKMLnVLpIKHzAtAw2NMj3m2rtQyFWslQ8pKvD3gOXCIgLPsqKJI5nnZ2TyehHV_636YW8C32VD5dyKWYRDPTgwl7eNIa76PVW0GT-cXN4NILvRyQqcsKfUs2OjPCl0Wk2I8upGZdQ";
+	String requestId = "78f8ed8b-1fb2-4a19-ad19-e0e07bc57e4f"; // "af55dc10-8790-45a2-94e8-133ec13cd115";
+	String authorizationCode = "eyJraWQiOiJyRzhja1lKNXFnS2FwNitpVG52UWpmM1pSK1lpRG9GOFY5c1pjR1B3MGUwPSIsImFsZyI6IlJTMjU2In0.eyJjdXN0b206b3JnYW5pemF0aW9uIjoiU2FuZ2FuYWt5IFRlY2hub2xvZ3kiLCJzdWIiOiJlZDIzMzhmNy1hNmVkLTQ0YzMtODQ0OC1kYmE3YzgyNWNjMmUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfRzVqWUlMRXFYIiwiY29nbml0bzp1c2VybmFtZSI6InFhLmRhdHRhQGdtYWlsLmNvbSIsImN1c3RvbTpqb2JfdGl0bGUiOiJXZWIgRGV2ZWxvcGVyXC9FbmdpbmVlciIsImdpdmVuX25hbWUiOiJEYXR0YSIsImF1ZCI6IjM4MGRpaXRtc2JhN2Q2MjIwaDhsc3ExYnFvIiwiZXZlbnRfaWQiOiI2ZTY1YjJmNi0xODZkLTQ3Y2EtOWMwMi03ZTgyYjEwMjEyZGYiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU4OTA4ODMxMCwiZXhwIjoxNTg5MTMzNDk0LCJpYXQiOjE1ODkxMjk4OTQsImZhbWlseV9uYW1lIjoiTW9yZSIsImVtYWlsIjoicWEuZGF0dGFAZ21haWwuY29tIn0.EVn1rCTCXXW6c9AUUXiFIRntADjfoAU07EggXk8e74ECw30cPqJnTE9E7k12YIJYSUcpVjxJR_YYaKx4ASeNyAAbmzzBtj0gk4i2yydEgbLYK9hkx4wZ7UmVXw_gdAhxJLFGNnXY5ZrABTYpfjpN3NhcAu5SqIy9kCbZlEiKJcytTTU3QXt3XArQ98SVmpoTGksniRy8JPXVJIb8AsAvc-yM-9w6QJHcNLrmr301O1SKJSJlEEF0zIBlSb4929diQxANo1uJLRQKhLUDAE412Lrt2jNsGCs59RediKa2eI6cWXcptlDiqexOXh1R9S9JgE9yPszsqAe8pmGTqVp3fA";
 	String s3Uri = "";
 	String s3Url_expected = "s3://custom-download/expected-custom-downloads/CAS_custom-donwload_expected.zip";
 	Response response;
@@ -47,10 +47,10 @@ public class ServicesStepDefinationUsingRestAssured {
 	private String expectedFileToCompare;
 	public static String temp_dir = "/temp-files/";
 
-	public static String userDir = System.getProperty("user.dir");
-	public static Scenario scenario;
-	public static String resourceDirectoryPath =  userDir + "/src/test/resources/"  ;
-    public static String expectedZipDirectory = System.getProperty("user.dir") + temp_dir ;
+	public String userDir = System.getProperty("user.dir");
+	public Scenario scenario;
+	public String resourceDirectoryPath =  userDir + "/src/test/resources/"  ;
+    public String expectedZipDirectory = System.getProperty("user.dir") + temp_dir ;
 
 	
 	@Before
@@ -248,7 +248,7 @@ public class ServicesStepDefinationUsingRestAssured {
 	}
 
 	
-	public static String getDownloadSpecificationFromFile(String fileName) {
+	public  String getDownloadSpecificationFromFile(String fileName) {
 		StringBuffer contents = new StringBuffer();
 
 		try {
@@ -291,17 +291,6 @@ public class ServicesStepDefinationUsingRestAssured {
 			}
 
 		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void main(String[] args) {
-		FileUtils fileUtils =  new FileUtils(scenario);
-		String actualZipFile = userDir + temp_dir + requestId + ".zip";
-		try {
-			fileUtils.getAbsuluteZipFileName(new ZipFile(actualZipFile));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
